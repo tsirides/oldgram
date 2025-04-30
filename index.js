@@ -7,6 +7,7 @@ const posts = [
     post: "images/post-vangogh.jpg",
     comment: "just took a few mushrooms lol",
     likes: 21,
+    liked: false,
   },
   {
     name: "Gustave Courbet",
@@ -16,6 +17,7 @@ const posts = [
     post: "images/post-courbet.jpg",
     comment: "i'm feelin a bit stressed tbh",
     likes: 4,
+    liked: false,
   },
   {
     name: "Joseph Ducreux",
@@ -26,24 +28,14 @@ const posts = [
     comment:
       "gm friends! which coin are YOU stacking up today?? post below and WAGMI!",
     likes: 152,
+    liked: false,
   },
 ];
 
 const post = document.getElementById("posts");
-let isLiked = false;
-
-//Read each post from the posts lists
 
 for (let i = 0; i < posts.length; i++) {
   //Add like functionality
-  function addLike(post) {
-    if (!isLiked) {
-      posts[post].likes += 1;
-      console.log(posts[post].likes);
-      // isLiked = true;
-    }
-    return posts[post].likes;
-  }
 
   //Render each post
 
@@ -56,17 +48,26 @@ for (let i = 0; i < posts.length; i++) {
                 <div class="location">${posts[i].location}</div>
             </div>
         </div>
-        <img class="post-image" src="${posts[i].post}">
+        <img ondblclick="addLike(${i})" class="post-image" src="${posts[i].post}">
         <div class="post-data">
             <ul class="post-actions">
-                <li onclick="addLike(${i})" id="like"><img src="images/icon-heart.png"></li>
+                <li onclick="addLike(${i})" id="like-${i}"><img src="images/icon-heart.png"></li>
                 <li id="comment"><img src="images/icon-comment.png"></li>
                 <li id="dm"><img src="images/icon-dm.png"></li>
             </ul>
-                <div class="like-count">${addLike(i)} likes</div>
-        
-            <div class="comments"><span class="username">${
-              posts[i].username
-            }</span> ${posts[i].comment}</div>
+                <div class="likes like-count-${i}">${posts[i].likes} likes</div>                
+            <div class="comments"><span class="username">${posts[i].username}</span> ${posts[i].comment}</div>
+            
     </div>`;
+
+  function addLike(post) {
+    if (posts[post].liked === false) {
+      let likeCount = document.querySelector(`.like-count-${post}`);
+      //let postLikes = posts[post].likes;
+      posts[post].likes += 1;
+      likeCount.textContent = `${posts[post].likes} likes`;
+      posts[post].liked = true;
+    }
+    return postLikes;
+  }
 }

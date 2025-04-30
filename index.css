@@ -69,7 +69,7 @@ header .user-avatar {
   margin-top: 12px;
 }
 .username,
-.like-count,
+.likes,
 .name {
   font-weight: 800;
 }
