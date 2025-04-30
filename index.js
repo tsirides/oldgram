@@ -68,6 +68,5 @@ for (let i = 0; i < posts.length; i++) {
       likeCount.textContent = `${posts[post].likes} likes`;
       posts[post].liked = true;
     }
-    return postLikes;
   }
 }
